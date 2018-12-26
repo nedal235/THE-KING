@@ -2,11 +2,10 @@ const discord = require("discord.js");
 const Discord = require("discord.js");
 const { Client, Util } = require('discord.js');
 const { PREFIX, GOOGLE_API_KEY } = require('./config');
-const botconfig = require("./config");
+const botconfig = require("./botconfig.json");
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
 var opus = require('opusscript');
-const bot = new Discord.Client({disableEveryone: true});
 const client = new Client({ disableEveryone: true });
 
 const youtube = new YouTube(GOOGLE_API_KEY);
@@ -197,11 +196,11 @@ function play(guild, song) {
 
 	serverQueue.textChannel.send(`Start playing: **${song.title}**`);
         }
-bot.on("message", async message => {
+client.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
-
-  let prefix = "!";
+  
+  let prefix = botconfig.prefix;
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
@@ -296,41 +295,41 @@ if(cmd === `${prefix}ic`){
 
   if(cmd === `${prefix}botinfo`){
 
-    let bicon = bot.user.displayAvatarURL;
+    let bicon = client.user.displayAvatarURL;
     let botembed = new Discord.RichEmbed()
     .setDescription("Bot Information")
     .setColor("#15f153")
     .setThumbnail(bicon)
-    .addField("Bot Name", bot.user.username)
-    .addField("Created On", bot.user.createdAt);
+    .addField("Bot Name", client.user.username)
+    .addField("Created On", client.user.createdAt);
 
     return message.channel.send(botembed);
   }
   
   if(cmd === `${prefix}st`){
 
-    bot.user.setGame(argresult , "https://www.twitch.tv/ninja");
+    client.user.setGame(argresult , "https://www.twitch.tv/ninja");
 
     return message.channel.send("Done");
   }
  
   if(cmd === `${prefix}ls`){
 
-    bot.user.setActivity(argresult , {type:'LISTENING'});
+    client.user.setActivity(argresult , {type:'LISTENING'});
 
     return message.channel.send("Done");
   }
    
   if(cmd === `${prefix}wt`){
 
-    bot.user.setActivity(argresult , {type:'WATCHING'});
+    client.user.setActivity(argresult , {type:'WATCHING'});
 
     return message.channel.send("Done");
   }
  
   if(cmd === `${prefix}pl`){
 
-    bot.user.setGame(argresult);
+    client.user.setGame(argresult);
 
     return message.channel.send("Done");
   }
@@ -361,5 +360,5 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
 
 
 });
-client.login(process.env.BOT_TOKE);
+client.login(process.env.BOT_TOKEN);
 
