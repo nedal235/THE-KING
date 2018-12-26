@@ -216,12 +216,6 @@ client.on("message", async message => {
         }
       }}).then(msg => {msg.delete(3000);});
                           }
-if(cmd === `${prefix}ic`){
-
-    var ic = argresult;
-
-    return message.channel.send("Done");
-  }
 
   if(cmd === `${prefix}kick`){
 
@@ -232,21 +226,7 @@ if(cmd === `${prefix}ic`){
     let kReason = args.join(" ").slice(22);
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("No can do pal!");
     if(kUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
-
-    let kickEmbed = new Discord.RichEmbed()
-    .setDescription("~Kick~")
-    .setColor("#e56b00")
-    .addField("Kicked User", `${kUser} with ID ${kUser.id}`)
-    .addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
-    .addField("Kicked In", message.channel)
-    .addField("Time", message.createdAt)
-    .addField("Reason", kReason);
-
-    let kickChannel = message.guild.channels.find(`name`, ic);
-    if(!kickChannel) return message.channel.send("Can't find incidents channel.");
-
     message.guild.member(kUser).kick(kReason);
-    kickChannel.send(kickEmbed);
 
     return;
   }
@@ -258,21 +238,8 @@ if(cmd === `${prefix}ic`){
     let bReason = args.join(" ").slice(22);
     if(!message.member.hasPermission("MANAGE_MEMBERS")) return message.channel.send("you cant!");
     if(bUser.hasPermission("MANAGE_MESSAGES")) return message.channel.send("That person can't be kicked!");
-
-    let banEmbed = new Discord.RichEmbed()
-    .setDescription("~Ban~")
-    .setColor("#bc0000")
-    .addField("Banned User", `${bUser} with ID ${bUser.id}`)
-    .addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
-    .addField("Banned In", message.channel)
-    .addField("Time", message.createdAt)
-    .addField("Reason", bReason);
-
-    let incidentchannel = message.guild.channels.find(`name`, ic);
-    if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-
     message.guild.member(bUser).ban(bReason);
-    incidentchannel.send(banEmbed);
+
 
 
     return;
