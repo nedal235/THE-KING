@@ -351,6 +351,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('لي�
 
 
 });
+
 client.on('message', function(message) {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
@@ -445,5 +446,30 @@ client.on('guildMemberRemove', member => {
     channel.send({embed : embed});
  
     });
+
+client.on('message', msg => {
+  let prefix = botconfig.prefix;
+  if (msg.author.bot) return;
+  if (!msg.content.startsWith(prefix)) return;
+  let command = msg.content.split(" ")[0];
+  command = command.slice(prefix.length);
+  let args = msg.content.split(" ").slice(1);
+ 
+    if(command === "clear") {
+        const emoji = client.emojis.find("name", "wastebasket");
+    let textxt = args.slice(0).join("");
+    if(msg.member.hasPermission("MANAGE_MESSAGES")) {
+    if (textxt === "") {
+        msg.delete().then;
+    msg.channel.send("***```Supply A Number ًں‘Œ```***").then(m => m.delete(3000));
+} else {
+    msg.delete().then;
+    msg.delete().then;
+    msg.channel.bulkDelete(textxt);
+        msg.channel.send("```Cleard: " + textxt + "\n Messages```").then(m => m.delete(3000));
+        }    
+    }
+}
+});
 client.login(process.env.BOT_TOKEN);
 
