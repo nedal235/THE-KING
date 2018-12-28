@@ -496,15 +496,14 @@ client.on('message', message => {
             });
         }
         } else {
-            return;
+            return message.channel.send("done");
         }
     });
     
-client.on('message', message => {
-
-  let prefix = botconfig.prefix;
+client.on('message', function(message) {
+         
  
-  if (message.content.startsWith(prefix + "profile")) {
+  if (message.content.startsWith(prefix + "user")) {
    
    if(!message.channel.guild) return message.reply(`هذا الأمر فقط ل السيرفرات `);
  
@@ -537,9 +536,7 @@ var id = new  Discord.RichEmbed()
 .addField(': تاريخ دخولك للديسكورد',` \`${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} \`**\n ${moment(heg.createdTimestamp).fromNow()}**` ,true)
 .addField(': تاريخ دخولك لسيرفرنا', `\`${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')}  \` **\n ${moment(h.joinedAt).fromNow()} **`, true)
 .addField(` :لقد قمت بدعوة `, ` ${inviteCount} `)
- 
- 
-.setFooter(message.author.username, message.author.avatarURL);  
+.setFooter(message.author.username, message.author.avatarURL);
 message.channel.sendEmbed(id);
 });
 }
