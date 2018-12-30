@@ -275,7 +275,9 @@ client.on("message", async message => {
     if(cmd === `${prefix}say`){
 
     message.channel.send(argresult);
-  } return;
+    return;
+    }
+ 
   
   if(cmd === `${prefix}st`){
 
