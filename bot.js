@@ -650,7 +650,24 @@ client.on('message',function(message) {
        });
    }
 });
+client.on("message", msg => {
+ let prefix = botconfig.prefix;
 
+	if(msg.content.startsWith(prefix + '.help')) {
+  msg.author.send(`
+      ─════════════ ⦁{✯General orders✯}⦁ ════════════─ ' ,'     
+     → Quick response Bot ←  ' ,' .ping 
+     → InviteBot ←  ' ,' .invite 
+     → Bot Information ← ' , '.bot-info 
+     →ا Avatar ← ' ,'  .avatar
+     → today's date ← ' , '.date
+     → Server Information ←  ' ,'   .server-info   
+     → bot owner ←  ' ,'   .bot-owner  ')
+     → Play songs ←  ' ,'   .play  ')
+     ─════════════ ⦁{✯Management Orders✯}⦁ ════════════─ ' ,'     
+      → اGive Band Member ←   ' ,'   .ban  
+      → Expel a member from the server ←   ' ,'   .kick  
+     → ClearChat ←   ' ,'   .clear `)
 
 
 client.login(process.env.BOT_TOKEN);
